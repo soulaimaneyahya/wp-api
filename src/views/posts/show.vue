@@ -1,13 +1,12 @@
 <template>
   <div>
-    <div v-if="loading" class="mt-4">
-      <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
+    <h3>Post #{{ id }}</h3>
+      <div v-if="loading" class="mt-4">
+        <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
-    </div>
-    <div v-else>
-      <h3>Post #{{ id }}</h3>
-      <div class="py-3">
+      <div v-else class="py-3">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ post.title.rendered }}</h5>
@@ -23,15 +22,19 @@
                 </ul>
             </div>
         </div>
+        <comments :id="id" />
       </div>
-    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import comments from '../comments/index.vue'
 
 export default {
+  components: {
+    comments
+  },
   props: ['id'],
   data() {
     return {
